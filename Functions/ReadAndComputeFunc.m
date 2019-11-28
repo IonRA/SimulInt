@@ -15,6 +15,4 @@ function [ result ] = ReadAndComputeFunc( description, numberOfPoints, rangeOfX,
            result.integral = ComputeIntegralOfPolynomial(numberOfPoints, result.coefficientsFunc, rangeOfX, rangeOfY);
     end
     
-    
 end
-
