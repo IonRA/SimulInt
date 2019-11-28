@@ -12,7 +12,7 @@ function [ integral ] = ComputeIntegralOfExponential( numberOfPoints, coefficien
         
         ExpValue = coefficient * exp(x(i));
         
-        if IsWithinCurve(y(i), ExpValue)
+        if IsWithinCurve(y(i), ExpValue) == true
             xin(i) = x(i);
             yin(i) = y(i);
             pointsWithinCurve = pointsWithinCurve + 1;

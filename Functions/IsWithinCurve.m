@@ -14,6 +14,8 @@ function [ result ] = IsWithinCurve( y, curveValue )
                 result = false;
             end
         end
+    else
+        result = false;
     end
 
 end
