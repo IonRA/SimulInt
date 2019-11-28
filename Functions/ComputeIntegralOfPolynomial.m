@@ -1,26 +1,13 @@
-function [ integral ] = ComputeIntegralOfPolynomial(coefficients, RangeOfX, RangeOfY)
+function [ integral ] = ComputeIntegralOfPolynomial(numberOfPoints, coefficients, rangeOfX, rangeOfY)
     
-    x = zeros(1, 10000);
-    y = zeros(1, 10000);
+    initializationResult = MonteCarloInitialization(numberOfPoints, rangeOfX, rangeOfY);
     
-    for i = 1 : 10000
-        x(i) = RangeOfX(1) + (RangeOfX(2) - RangeOfX(1)) * rand();
-        
-        y(i) = RangeOfY(1) + (RangeOfY(2) - RangeOfY(1)) * rand();
-    end
-    
-    figure()
-    scatter(x, y, '.', 'b');
-    hold on
-    
-    xlabel('x--->');
-    ylabel('y--->');
-    title('Monte-Carlo Simulation');
-   
-    xin = zeros(1, length(x));
-    yin = zeros(1, length(x));
+    x = initializationResult.x;
+    y = initializationResult.y;
+    xin = initializationResult.xin;
+    yin = initializationResult.yin;
     pointsWithinCurve = 0;
-    
+
     for i = 1 : length(x)
         
         PolValue = 0;
@@ -52,7 +39,7 @@ function [ integral ] = ComputeIntegralOfPolynomial(coefficients, RangeOfX, Rang
     end
     
     totalPoints = length(x);
-    squareArea = abs((RangeOfX(2) - RangeOfX(1)) * (RangeOfY(2) - RangeOfY(1)));
+    squareArea = abs((rangeOfX(2) - rangeOfX(1)) * (rangeOfY(2) - rangeOfY(1)));
     
     integral = (squareArea / totalPoints) * pointsWithinCurve; 
         
