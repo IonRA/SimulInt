@@ -1,9 +1,8 @@
 function [ result ] = MonteCarloInitialization( numberOfPoints, rangeOfX, rangeOfY )
 
-    %%x = zeros(1, str2num(numberOfPoints));
-    %%y = zeros(1, str2num(numberOfPoints));
     result.x = [];
     result.y = [];
+
     for i = 1 : numberOfPoints
         result.x(i) = rangeOfX(1) + (rangeOfX(2) - rangeOfX(1)) * rand();
         
@@ -22,4 +21,3 @@ function [ result ] = MonteCarloInitialization( numberOfPoints, rangeOfX, rangeO
     result.yin = zeros(1, length(result.x));
     
 end
-
