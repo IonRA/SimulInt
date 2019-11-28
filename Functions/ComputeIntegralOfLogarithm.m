@@ -12,26 +12,13 @@ function [ integral ] = ComputeIntegralOfLogarithm( numberOfPoints, coefficient,
         
         LogValue = coefficient * log(x(i));
         
-        if isreal(LogValue)
-            if LogValue > 0
-                if y(i) < LogValue && y(i) > 0
-                    xin(i) = x(i);
-                    yin(i) = y(i);
-                    pointsWithinCurve = pointsWithinCurve + 1;
-                else
-                    xin(i) = 0;
-                    yin(i) = 0;
-                end
-            else
-                if y(i) > LogValue && y(i) < 0
-                    xin(i) = x(i);
-                    yin(i) = y(i);
-                    pointsWithinCurve = pointsWithinCurve + 1;
-                else
-                    xin(i) = 0;
-                    yin(i) = 0;
-                end
-            end
+        if IsWithinCurve(y(i), LogValue)
+            xin(i) = x(i);
+            yin(i) = y(i);
+            pointsWithinCurve = pointsWithinCurve + 1;
+        else
+            xin(i) = 0;
+            yin(i) = 0;
         end
         
     end

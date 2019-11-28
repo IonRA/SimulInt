@@ -15,25 +15,14 @@ function [ integral ] = ComputeIntegralOfPolynomial(numberOfPoints, coefficients
         for j = 1 : length(coefficients)
             PolValue = PolValue + coefficients(j) * (x(i) ^ j);
         end
-        
-        if PolValue > 0
-            if y(i) < PolValue && y(i) > 0
-                xin(i) = x(i);
-                yin(i) = y(i);
-                pointsWithinCurve = pointsWithinCurve + 1;
-            else
-                xin(i) = 0;
-                yin(i) = 0;
-            end
+                
+        if IsWithinCurve(y(i), PolValue) == true
+            xin(i) = x(i);
+            yin(i) = y(i);
+            pointsWithinCurve = pointsWithinCurve + 1;
         else
-            if y(i) > PolValue && y(i) < 0
-                xin(i) = x(i);
-                yin(i) = y(i);
-                pointsWithinCurve = pointsWithinCurve + 1;
-            else
-                xin(i) = 0;
-                yin(i) = 0;
-            end
+            xin(i) = 0;
+            yin(i) = 0;
         end
         
     end

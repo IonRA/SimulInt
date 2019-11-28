@@ -1,5 +1,5 @@
-function [ integral ] = ComputeIntegralOfExponential( numberOfPoints, coefficient, rangeOfX, rangeOfY)
-
+function [ integral ] = ComputeIntegralOfPolynomial(numberOfPoints, coefficients, rangeOfX, rangeOfY)
+    
     initializationResult = MonteCarloInitialization(numberOfPoints, rangeOfX, rangeOfY);
     
     x = initializationResult.x;
@@ -7,12 +7,16 @@ function [ integral ] = ComputeIntegralOfExponential( numberOfPoints, coefficien
     xin = initializationResult.xin;
     yin = initializationResult.yin;
     pointsWithinCurve = 0;
-    
+
     for i = 1 : length(x)
         
-        ExpValue = coefficient * exp(x(i));
+        PolValue = 0;
         
-        if IsWithinCurve(y(i), ExpValue)
+        for j = 1 : length(coefficients)
+            PolValue = PolValue + coefficients(j) * (x(i) ^ j);
+        end
+                
+        if IsWithinCurve(y(i), PolValue) == true
             xin(i) = x(i);
             yin(i) = y(i);
             pointsWithinCurve = pointsWithinCurve + 1;
@@ -20,6 +24,8 @@ function [ integral ] = ComputeIntegralOfExponential( numberOfPoints, coefficien
             xin(i) = 0;
             yin(i) = 0;
         end
+        
+        
         
     end
     
@@ -31,5 +37,5 @@ function [ integral ] = ComputeIntegralOfExponential( numberOfPoints, coefficien
     scatter(xin, yin, '.', 'r');
     hold off
     legend('Points outside the cuve','Points within the curve')
-
+        
 end
